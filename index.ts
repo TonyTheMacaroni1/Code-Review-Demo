@@ -10,12 +10,21 @@ app.get('/', (req: Request, res: Response) => {
 });
 
 // Get user
-app.get('/user/:id', (req: Request, res: Response) => {
+app.get('/user/:id', async (req: Request, res: Response) => {
     const id = req.params.id
 
-  const user = UserService.getUser(id);
+  const user = await UserService.getUser(id);
 
   res.send({ user });
+});
+
+// Get user first and last name
+app.get('/user/:id/firstLast', async (req: Request, res: Response) => {
+    const id = req.params.id
+
+  const u = UserService.getUserFirstAndLastName(id);
+
+  res.send({ u });
 });
 
 // Start the server
